@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { HiOutlineSearch } from "react-icons/hi";
 import { SlMenu } from "react-icons/sl";
 import { VscChromeClose } from "react-icons/vsc";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import ContentWrapper from "../contentWrapper/ContentWrapper";
 import logo from "../../assets/movix-logo.svg";
 
@@ -14,6 +14,10 @@ const Header = () => {
   const [showSearch, setShowSearch] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
   const navigate = useNavigate();
+  const location = useLocation();
+useEffect(()=>{
+window.scrollTo(0,0);
+},[location])
 
   const controlNavbar = () => {
     console.log(window.scrollY);
