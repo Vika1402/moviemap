@@ -11,11 +11,10 @@ import Img from "../../../components/lazyLoadImage/Img"; // Changed import
 import PosterFallback from "../../../assets/no-poster.png";
 import { PlayButton } from "../PlayButton";
 import VideoPopup from "../../../components/videoPopup/VideoPopup";
-VideoPopup
+VideoPopup;
 const DetailsBanner = ({ video, crew }) => {
-const [show,setShow]=useState(false);
-const [videoId,setVideoId]=useState(null)
-
+  const [show, setShow] = useState(false);
+  const [videoId, setVideoId] = useState(null);
 
   const { mediaType, id } = useParams();
   const { data, loading } = useFetch(`/${mediaType}/${id}`);
@@ -71,7 +70,10 @@ const [videoId,setVideoId]=useState(null)
                     <Genres data={_genres} />
                     <div className="row">
                       <CircleRating rating={data.vote_average.toFixed(1)} />
-                      <div className="playbtn" onClick={() => {}}>
+                      <div className="playbtn" onClick={() => {
+                        setShow(true)
+                        setVideoId(video.key)
+                      }}>
                         <PlayButton />
                         <span className="text">Watch Trailer</span>
                       </div>
@@ -117,10 +119,10 @@ const [videoId,setVideoId]=useState(null)
                         </span>
                       </div>
                     )}
-                    
+
                     {data?.created_by?.length > 0 && (
                       <div className="info">
-                        <span className="text bold">Creator:{" "} </span>
+                        <span className="text bold">Creator: </span>
                         <span className="text">
                           {data?.created_by?.map((d, i) => (
                             <span key={i}>
@@ -134,17 +136,12 @@ const [videoId,setVideoId]=useState(null)
                   </div>
                 </div>
               </ContentWrapper>
-              <VideoPopup show={show}
-              setShow={setShow}
-              videoId={videoId}
-              setVideoId={setVideoId}
-
-
-
+              <VideoPopup
+                show={show}
+                setShow={setShow}
+                videoId={videoId}
+                setVideoId={setVideoId}
               />
-
-
-
             </React.Fragment>
           )}
         </>

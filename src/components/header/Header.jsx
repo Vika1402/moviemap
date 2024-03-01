@@ -71,7 +71,7 @@ window.scrollTo(0,0);
     <header className={` header ${mobileMenu ? "mobileView" : ""} ${show}`}>
       <ContentWrapper>
         <div className="logo">
-          <img src={logo} alt="" />
+          <img onClick={()=>  navigate("/")} src={logo} alt="" />
         </div>
         <ul className="menuItems">
           <li className="menuItem" onClick={() => navigationHandler("movie")}>
