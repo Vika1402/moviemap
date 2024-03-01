@@ -1,11 +1,10 @@
-// https://www.youtube.com/watch?v=VLgVw2NEqCM&ab_channel=JSDevHindi
 import {
   FaFacebookF,
   FaInstagram,
   FaTwitter,
   FaLinkedin,
 } from "react-icons/fa";
-import "./Footer.scss";
+import "./Style.scss";
 import ContentWrapper from "../contentWrapper/ContentWrapper";
 
 const Footer = () => {
