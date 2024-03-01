@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import DetailsBanner from "./detailsBanner/DetailsBanner";
 import useFetch from "../../hooks/useFetch";
-import Cast from "./cast/Cast";
+import CAst from "./cast/CAst";
 import VideosSection from "./videoFetch/VideoFetch";
 import Similar from "../../components/caousels/Similar";
 import Recommendation from "../../components/caousels/Recommendation";
@@ -14,7 +14,7 @@ const Details = () => {
   return (
     <div>
       <DetailsBanner video={data?.results?.[0]} crew={credits?.crew} />
-      <Cast data={credits?.cast} loading={creditsLoading} />
+      <CAst data={credits?.CAst} loading={creditsLoading} />
       <VideosSection data={data} loading={loading} />
       <Similar mediaType={mediaType} id={id}/>
       <Recommendation mediaType={mediaType} id={id}/>

@@ -1,3 +1,4 @@
+/* eslint-disable no-unsafe-optional-chaining */
 
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
@@ -38,14 +39,14 @@ const Explore = () => {
 
     const { data: genresData } = useFetch(`/genre/${mediaType}/list`);
 
-    const fetchInitialData = useCallback(() => {
+    const fetchInitialData = () => {
         setLoading(true);
         fetchDataFromApi(`/discover/${mediaType}`, filters).then((res) => {
             setData(res);
             setPageNum((prev) => prev + 1);
             setLoading(false);
         });
-    });
+    };
 
     const fetchNextPageData = () => {
         fetchDataFromApi(
@@ -71,7 +72,8 @@ const Explore = () => {
         setSortby(null);
         setGenre(null);
         fetchInitialData();
-    }, [fetchInitialData, mediaType]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [mediaType]);
 
     const onChange = (selectedItems, action) => {
         if (action.name === "sortby") {
