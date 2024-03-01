@@ -9,7 +9,7 @@ import Genres from "../../../components/genres/Genres";
 import CircleRating from "../../../components/circleRating/CircleRating";
 import Img from "../../../components/lazyLoadImage/Img"; // Changed import
 import PosterFallback from "../../../assets/no-poster.png";
-
+import { PlayButton } from "../PlayButton";
 const DetailsBanner = ({ video, crew }) => {
   const { mediaType,id } = useParams();
   const { data, loading } = useFetch(`/${mediaType}/${id}`);
@@ -55,6 +55,12 @@ const _genres=data?.genres?.map((g)=>g.id)
                   <Genres data={_genres}/>
                   <div className="row">
                     <CircleRating rating={data.vote_average.toFixed(1)}/>
+                    <div className="playbtn" onClick={()=>{}}>
+                      <PlayButton/>
+                      <span className="text">
+                        Watch Trailer
+                      </span>
+                    </div>
                   </div>
 
                   </div>
