@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import dayjs from "dayjs";
@@ -10,8 +10,13 @@ import CircleRating from "../../../components/circleRating/CircleRating";
 import Img from "../../../components/lazyLoadImage/Img"; // Changed import
 import PosterFallback from "../../../assets/no-poster.png";
 import { PlayButton } from "../PlayButton";
-
+import VideoPopup from "../../../components/videoPopup/VideoPopup";
+VideoPopup
 const DetailsBanner = ({ video, crew }) => {
+const [show,setShow]=useState(false);
+const [videoId,setVideoId]=useState(null)
+
+
   const { mediaType, id } = useParams();
   const { data, loading } = useFetch(`/${mediaType}/${id}`);
 
@@ -101,20 +106,45 @@ const DetailsBanner = ({ video, crew }) => {
                     </div>
                     {director?.length > 0 && (
                       <div className="info">
-                        <span className="text bold"> Director :{" "} </span>
+                        <span className="text bold">Director : </span>
                         <span className="text">
-                          {director.map((director, i) => {
-                            <span key={i}>{director.name}
-                            {director.length-1 !==i && ", "}
-                            
-                            </span>;
-                          })}
+                          {director.map((d, i) => (
+                            <React.Fragment key={i}>
+                              {d.name}
+                              {director.length - 1 !== i && ", "}
+                            </React.Fragment>
+                          ))}
+                        </span>
+                      </div>
+                    )}
+                    
+                    {data?.created_by?.length > 0 && (
+                      <div className="info">
+                        <span className="text bold">Creator:{" "} </span>
+                        <span className="text">
+                          {data?.created_by?.map((d, i) => (
+                            <span key={i}>
+                              {d.name}
+                              {data?.created_by.length - 1 !== i && ", "}
+                            </span>
+                          ))}
                         </span>
                       </div>
                     )}
                   </div>
                 </div>
               </ContentWrapper>
+              <VideoPopup show={show}
+              setShow={setShow}
+              videoId={videoId}
+              setVideoId={setVideoId}
+
+
+
+              />
+
+
+
             </React.Fragment>
           )}
         </>
