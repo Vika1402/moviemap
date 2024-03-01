@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Select from "react-select";
@@ -38,14 +38,14 @@ const Explore = () => {
 
     const { data: genresData } = useFetch(`/genre/${mediaType}/list`);
 
-    const fetchInitialData = () => {
+    const fetchInitialData = useCallback(() => {
         setLoading(true);
         fetchDataFromApi(`/discover/${mediaType}`, filters).then((res) => {
             setData(res);
             setPageNum((prev) => prev + 1);
             setLoading(false);
         });
-    };
+    });
 
     const fetchNextPageData = () => {
         fetchDataFromApi(
@@ -71,7 +71,7 @@ const Explore = () => {
         setSortby(null);
         setGenre(null);
         fetchInitialData();
-    }, [mediaType]);
+    }, [fetchInitialData, mediaType]);
 
     const onChange = (selectedItems, action) => {
         if (action.name === "sortby") {
