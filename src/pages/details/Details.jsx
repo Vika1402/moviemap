@@ -1,13 +1,11 @@
-import React from 'react'
-import { useParams } from 'react-router-dom';
-import useFetch from '../../hooks/useFetch';
+import DetailsBanner from "./detailsBanner/DetailsBanner";
 
 const details = () => {
-  const {mediaType,id}=useParams();
-  const {data,loading}=useFetch(`/movie/{movieId}`)
   return (
-    <div>details</div>
-  )
-}
+    <div>
+      <DetailsBanner />
+    </div>
+  );
+};
 
 export default details;

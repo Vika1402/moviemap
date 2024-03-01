@@ -41,25 +41,24 @@ function App() {
       promises.push(fetchDataFromApi(`/genre/${url}/list`));
     });
     const data = await Promise.all(promises);
-  
+
     data.map(({ genres }) => {
-      return genres.map((item) => (allGeneres[item.id]=item));
+      return genres.map((item) => (allGeneres[item.id] = item));
     });
-  
+
     dispatch(getGenres(allGeneres));
   };
 
   return (
     <BrowserRouter>
       <Header />
-    
 
       <Routes>
-        <Route path="/" element={<Home/>} />
-        <Route path="/:mediaType:id" element={<Details/>} />
-        <Route path="/search/:query" element={<SearchResult/>} />
-        <Route path="/explore/:mediaType" element={<Explore/>} />
-        <Route path="*" element={<PageNotFound/>} />
+        <Route path="/" element={<Home />} />
+        <Route path="/:mediaType/:id" element={<Details />} />
+        <Route path="/search/:query" element={<SearchResult />} />
+        <Route path="/explore/:mediaType" element={<Explore />} />
+        <Route path="*" element={<PageNotFound />} />
       </Routes>
       <Footer />
     </BrowserRouter>
